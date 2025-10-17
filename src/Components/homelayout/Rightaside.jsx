@@ -1,6 +1,7 @@
 import React from "react";
 import Sociallogin from "../Sociallogin";
 import Findus from "./Findus";
+import Qzone from "../Qzone";
 
 const Rightaside = () => {
   return (
@@ -10,6 +11,9 @@ const Rightaside = () => {
       </div>
       <div>
         <Findus></Findus>
+      </div>
+      <div>
+        <Qzone></Qzone>
       </div>
     </div>
   );
