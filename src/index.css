@@ -22,3 +22,8 @@
 *{
    font-family: "Poppins", sans-serif;
 }
+
+
+a.active{
+  @apply underline bg-base-300
+}
