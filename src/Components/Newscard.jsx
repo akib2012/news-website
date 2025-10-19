@@ -1,11 +1,13 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Newscard = ({ news }) => {
+  
+  const rating = Math.round(news?.rating?.number || 0);
 
-    
   return (
     <div>
-      <div className="max-w-fit  px-4 mb-4 mx-5 bg-white rounded-xl shadow-md overflow-hidden">
+      <div className="max-w-fit px-4 mb-4 mx-5 bg-white rounded-xl shadow-md overflow-hidden">
         {/* Author & Date */}
         <div className="flex items-center p-4">
           <img
@@ -14,8 +16,12 @@ const Newscard = ({ news }) => {
             alt="Author"
           />
           <div>
-            <p className="text-sm font-semibold text-gray-800">Awlad Hossain</p>
-            <p className="text-xs text-gray-500">2022-08-21</p>
+            <p className="text-sm font-semibold text-gray-800">
+              {news.author.name}
+            </p>
+            <p className="text-xs text-gray-500">
+              {new Date(news.author.published_date).toLocaleDateString()}
+            </p>
           </div>
           <div className="ml-auto flex space-x-2 text-gray-400">
             <button title="Bookmark" className="hover:text-gray-600">
@@ -28,10 +34,7 @@ const Newscard = ({ news }) => {
         </div>
 
         {/* Title */}
-        <h2 className="px-4 text-lg font-bold text-gray-900">
-          Biden Pledges Nearly $3 Billion To Ukraine In Largest U.S. Military
-          Aid Package Yet
-        </h2>
+        <h2 className="px-4 text-lg font-bold text-gray-900">{news.title}</h2>
 
         {/* Image */}
         <img
@@ -43,25 +46,30 @@ const Newscard = ({ news }) => {
         {/* Description */}
         <div className="p-4">
           <p className="text-sm text-gray-600 mb-2">
-            Wednesday, August 24, 2022 | Tag Cloud Tags: Biden, EU, Euro,
-            Europe, Joe Biden, Military, News, Russia, Security, UK, Ukraine,
-            United States, Worthy News (Worthy News) – U.S. President Joe Biden
-            has announced nearly $3 billion in new U.S. military a...
+            {news.details.length > 200
+              ? `${news.details.slice(0, 200)}...`
+              : news.details}
           </p>
-          <a href="#" className="text-red-500 font-medium hover:underline">
+          <Link to={`/newsdetils/${news.id}`} href="#" className="text-red-500 font-medium hover:underline">
             Read More
-          </a>
+          </Link>
         </div>
 
         {/* Ratings & Views */}
         <div className="px-4 pb-4 flex items-center justify-between text-gray-500 text-sm">
           <div className="flex items-center space-x-1">
-            <span className="text-yellow-400">★ ★ ★ ★ ★</span>
-            <span>4.9</span>
+            {/* Dynamic Stars */}
+            <span className="text-yellow-400 text-lg">
+              {Array.from({ length: rating }).map((_, i) => (
+                <span key={i}>★</span>
+              ))}
+            </span>
+            <span>{news.rating.number}</span>
           </div>
+
           <div className="flex items-center space-x-1">
             <span>👁️</span>
-            <span>499</span>
+            <span>{news.total_view}</span>
           </div>
         </div>
       </div>

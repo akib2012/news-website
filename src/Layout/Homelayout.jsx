@@ -22,14 +22,14 @@ const Homelayout = () => {
         </section>
 
         <div className="max-w-10/12 mx-auto grid gap-y-1 grid-cols-12">
-          <section className="col-span-3">
+          <section className="col-span-3 h-fit top-4 sticky">
             <Leftaside></Leftaside>
           </section>
 
           <section className="mian col-span-6">
             <Outlet></Outlet>
           </section>
-          <section className="right-side col-span-3">
+          <section className="right-side col-span-3 h-fit top-4 sticky">
             <Rightaside></Rightaside>
           </section>
         </div>

@@ -3,6 +3,10 @@ import Header from "../Components/Header";
 import Homelayout from "../Layout/Homelayout";
 import Homepage from "../Pages/Homepage";
 import CaterogiNews from "../Components/CaterogiNews";
+import Authintectionlayout from "../Layout/Authintectionlayout";
+import Login from "../Pages/Login";
+import Regester from "../Pages/Regester";
+import Newsdetils from "../Pages/Newsdetils";
 
 const router = createBrowserRouter([
     {
@@ -20,6 +24,28 @@ const router = createBrowserRouter([
             }
             
         ]
+    },
+    {
+        path: "/auth",
+        element: <Authintectionlayout></Authintectionlayout>,
+        children: [
+            {
+               path: '/auth/login',
+               Component: Login,
+            },
+            {
+                path:'/auth/regester',
+                Component: Regester,
+            },
+            
+            
+        ]
+    },
+    {
+        path: '/newsdetils/:id',
+        Component: Newsdetils,
+        loader: () => fetch('/news.json'),
+
     }
 
 ])
